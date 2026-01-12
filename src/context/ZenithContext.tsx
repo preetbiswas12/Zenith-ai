@@ -22,7 +22,7 @@ type ZenithAction =
 const initialState: ZenithState = {
   conversations: [],
   activeConversationId: null,
-  apiKey: import.meta.env.VITE_GROQ_API_KEY || '',
+  apiKey: import.meta.env.VITE_GEMINI_API_KEY || '',
   loading: false,
 };
 
@@ -167,7 +167,7 @@ export function ZenithProvider({ children }: { children: React.ReactNode }) {
     
     try {
       if (!state.apiKey) {
-        throw new Error('Please set your Groq API key in the settings');
+        throw new Error('Please set your Gemini API key in the settings');
       }
       
       const activeConversation = state.conversations.find(c => c.id === conversationId);
@@ -180,14 +180,14 @@ export function ZenithProvider({ children }: { children: React.ReactNode }) {
       
       messages.push({ role: 'user', content });
       
-      const response = await fetch(import.meta.env.VITE_GROQ_API_URL, {
+      const response = await fetch(import.meta.env.VITE_GEMINI_API_URL, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${state.apiKey}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          model: import.meta.env.VITE_GROQ_MODEL,
+          model: import.meta.env.VITE_GEMINI_MODEL,
           messages,
           temperature: 0.7,
           max_tokens: 1000
@@ -197,7 +197,7 @@ export function ZenithProvider({ children }: { children: React.ReactNode }) {
       const data = await response.json();
       
       if (!response.ok) {
-        throw new Error(data.error?.message || 'Failed to get response from Groq API');
+        throw new Error(data.error?.message || 'Failed to get response from Gemini API');
       }
       
       const assistantMessage: Message = {

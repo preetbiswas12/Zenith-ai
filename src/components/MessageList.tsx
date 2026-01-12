@@ -37,7 +37,7 @@ const MessageList: React.FC = () => {
             <BrainCircuit size={48} className="mx-auto mb-4 text-indigo-500 dark:text-indigo-400" />
             <h2 className="text-xl font-semibold mb-2">Welcome to Zenith</h2>
             <p className="mb-4">
-              Your AI study assistant powered by Groq. I can help with research, explain concepts, summarize information, and more.
+              Your AI study assistant powered by Gemini. I can help with research, explain concepts, summarize information, and more.
             </p>
             <p className="mb-6">Choose a template below or type your own message to start.</p>
           </div>
